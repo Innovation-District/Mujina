@@ -153,7 +153,7 @@
           <stopKey>foo</stopKey>
           <connectors>
             <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-              <port>19090</port>
+              <port>19191</port>
               <maxIdleTime>60000</maxIdleTime>
             </connector>
           </connectors>

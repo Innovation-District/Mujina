@@ -32,7 +32,7 @@ Features
   * signing certificate  
   * sso Service URL
   
-- An OAuth 'form-based' client capable of making configurable OAuth calls (available under http://localhost:9090/social/social-queries.shtml):
+- An OAuth 'form-based' client capable of making configurable OAuth calls (available under http://localhost:19191/social/social-queries.shtml):
   * 2-legged and 3-legged OAuth1.0a
   * OAuth2.0 authorization code grant and implicit grant
   * OAuth2.0 access token requests using either query parameters, entity body parameters or the authorization header
@@ -80,7 +80,7 @@ cd mujina-idp
 mvn jetty:run
 ```
 
-Then, go to https://localhost:8443/ or http://localhost:8080/
+Then, go to https://localhost:8443/ or http://localhost:18181/
 
 Run the SP using jetty
 ----------------------
@@ -91,7 +91,7 @@ cd mujina-sp
 mvn jetty:run
 ```
 
-Then, go to http://localhost:9090/. You will be redirected to the IdP, where you can
+Then, go to http://localhost:19191/. You will be redirected to the IdP, where you can
 login with username admin and password secret.
 
 Resetting the IDP
@@ -103,7 +103,7 @@ This API is available on both the IDP and the SP.
 curl -v -H "Accept: application/json" \
         -H "Content-type: application/json" \
         -X POST \
-        http://localhost:8080/api/reset
+        http://localhost:18181/api/reset
 ```
 
 Changing the entityID
@@ -115,7 +115,7 @@ This API is available on both the IDP and the SP.
 curl -v -H "Accept: application/json" \
         -H "Content-type: application/json" \
         -X PUT -d '{"value": "myEntityId"}' \
-        http://localhost:8080/api/entityid
+        http://localhost:18181/api/entityid
 ```
 
 Changing the signing credentials (Both IDP and SP)
@@ -153,7 +153,7 @@ QQDgNLxVcByrVgmRmTPTwLhSfIveOqE6jBlQ8o0KyoQl4zCSDDtMEb9NEFxxvI7NNjgdZh1RKrzZ\
 curl -v -H "Accept: application/json" \
         -H "Content-type: application/json" \
         -X POST -d "{\"certificate\": \"$CERT\",\"key\":\"$KEY\"}" \
-        http://localhost:8080/api/signing-credential
+        http://localhost:18181/api/signing-credential
 ```
 
 Setting attribute foo to bar (e.g. urn:mace:dir:attribute-def:foo to bar)
@@ -165,7 +165,7 @@ This API is only available on the IDP.
 curl -v -H "Accept: application/json" \
         -H "Content-type: application/json" \
         -X PUT -d '{"value": "bar"}' \
-        http://localhost:8080/api/attributes/urn:mace:dir:attribute-def:foo
+        http://localhost:18181/api/attributes/urn:mace:dir:attribute-def:foo
 ```
 
 Removing an attribute
@@ -177,7 +177,7 @@ This API is only available on the IDP.
 curl -v -H "Accept: application/json" \
         -H "Content-type: application/json" \
         -X DELETE \
-        http://localhost:8080/api/attributes/urn:mace:dir:attribute-def:foo
+        http://localhost:18181/api/attributes/urn:mace:dir:attribute-def:foo
 ```
 
 Adding a user
@@ -189,7 +189,7 @@ This API is only available on the IDP.
 curl -v -H "Accept: application/json" \
         -H "Content-type: application/json" \
         -X PUT -d '{"name": "hacker", "password": "iamgod", "authorities": ["ROLE_USER", "ROLE_ADMIN"]}' \
-        http://localhost:8080/api/users
+        http://localhost:18181/api/users
 ```
 
 Setting the authentication method
@@ -201,7 +201,7 @@ This API is only available on the IDP.
 curl -v -H "Accept: application/json" \
         -H "Content-type: application/json" \
         -X PUT -d '{"value": "ALL"}' \
-        http://localhost:8080/api/authmethod
+        http://localhost:18181/api/authmethod
 ```
 
 The authentication method API has two possible values.
@@ -223,6 +223,6 @@ This API is only available on the SP.
 ```bash
 curl -v -H "Accept: application/json" \
         -H "Content-type: application/json" \
-        -X PUT -d '{"value": "http://localhost:8080/SingleSignOnService/vo:test"}' \
-        http://localhost:9090/api/ssoServiceURL
+        -X PUT -d '{"value": "http://localhost:18181/SingleSignOnService/vo:test"}' \
+        http://localhost:19191/api/ssoServiceURL
 ```
