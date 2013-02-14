@@ -31,47 +31,36 @@
 
   <repositories>
     <repository>
+      <id>innovation-district-nexus</id>
+      <name>Innovation District Nexus Maven repository for third party dependencies</name>
+      <url>https://innovation-district.buildserver.nl/nexus/content/groups/public</url>
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
       <releases>
-        <enabled>false</enabled>
-      </releases>
-      <id>openconext-snapshots</id>
-      <name>OpenConext public snapshot repository</name>
-      <url>https://build.surfconext.nl/repository/public/snapshots</url>
-    </repository>
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <releases>
         <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
       </releases>
-      <id>openconext-releases</id>
-      <name>OpenConext public releases repository</name>
-      <url>https://build.surfconext.nl/repository/public/releases</url>
     </repository>
   </repositories>
 
   <distributionManagement>
     <repository>
-      <id>openconext-releases</id>
-      <name>OpenConext public releases repository</name>
-      <url>dav:https://build.surfconext.nl/repository/public/releases</url>
+      <id>innovation-district-nexus</id>
+      <name>Innovation District Nexus Maven releases repository</name>
+      <url>https://innovation-district.buildserver.nl/nexus/content/repositories/releases</url>
     </repository>
+
     <snapshotRepository>
-      <id>openconext-snapshots</id>
-      <name>OpenConext public snapshot repository</name>
-      <url>dav:https://build.surfconext.nl/repository/public/snapshots</url>
+      <id>innovation-district-nexus</id>
+      <name>Innovation District Nexus Maven snapshots repository</name>
+      <url>https://innovation-district.buildserver.nl/nexus/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
 
   <scm>
-    <connection>scm:git:git://github.com/OpenConext/Mujina.git</connection>
-    <developerConnection>scm:git:git@github.com:OpenConext/Mujina.git</developerConnection>
-    <url>scm:git:git@github.com:OpenConext/Mujina.git</url>
+    <connection>scm:git:git://github.com/Innovation-District/Mujina.git</connection>
+    <developerConnection>scm:git:git@github.com:Innovation-District/Mujina.git</developerConnection>
+    <url>scm:git:git@github.com:Innovation-District/Mujina.git</url>
   </scm>
 
   <properties>
