@@ -19,12 +19,12 @@
   <groupId>org.surfnet.coin</groupId>
   <artifactId>mujina-idp</artifactId>
   <packaging>war</packaging>
-  <version>3</version>
+  <version>4-SNAPSHOT</version>
 
   <parent>
     <groupId>org.surfnet.coin</groupId>
     <artifactId>mujina</artifactId>
-    <version>3</version>
+    <version>4-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
