@@ -78,6 +78,5 @@ ___  ___        _  _
 <H4>Authentication Principal is: </H4>
 <p><sec:authentication property="principal"></sec:authentication></p>
 
-
 </body>
 </html>

@@ -54,6 +54,5 @@ ___  ___        _  _
 
 <p><sec:authentication property="principal"></sec:authentication></p>
 
-
 </body>
 </html>
