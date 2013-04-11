@@ -79,11 +79,5 @@ ___  ___        _  _
 <H4>Authentication Principal is: </H4>
 <p><sec:authentication property="principal"></sec:authentication></p>
 
-<H4>Authentication Credentials are: </H4>
-<p><sec:authentication property="credentials"></sec:authentication></p>
-
-<H4>Authentication Details are: </H4>
-<p><sec:authentication property="details"></sec:authentication></p>
-
 </body>
 </html>
