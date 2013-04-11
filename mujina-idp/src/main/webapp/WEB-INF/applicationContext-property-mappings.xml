@@ -22,6 +22,8 @@
 
   <bean id="mappings"
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="ignoreResourceNotFound" value="true"/>
+    <property name="ignoreUnresolvablePlaceholders" value="true"/>
     <property name="locations">
       <util:list>
         <value>classpath:mujina-idp.properties</value>
