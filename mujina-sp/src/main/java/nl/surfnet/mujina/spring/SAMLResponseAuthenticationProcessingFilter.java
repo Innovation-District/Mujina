@@ -62,7 +62,7 @@ public class SAMLResponseAuthenticationProcessingFilter extends
         SAMLMessageContext messageContext = null;
 
         try {
-            messageContext = bindingAdapter.extractSAMLMessageContext(request);
+            messageContext = bindingAdapter.extractSAMLMessageContext(new ProxyHttpServletRequestWrapper(request));
         } catch (MessageDecodingException me) {
             throw new ServiceProviderAuthenticationException("Could not decode SAML Response", me);
         } catch (SecurityException se) {
