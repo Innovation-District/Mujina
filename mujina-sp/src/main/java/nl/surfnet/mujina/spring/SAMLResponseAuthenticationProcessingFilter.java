@@ -59,7 +59,7 @@ public class SAMLResponseAuthenticationProcessingFilter extends
 
         logger.debug("Attempting authentication.");
 
-        SAMLMessageContext messageContext = null;
+        SAMLMessageContext messageContext;
 
         try {
             messageContext = bindingAdapter.extractSAMLMessageContext(new ProxyHttpServletRequestWrapper(request));

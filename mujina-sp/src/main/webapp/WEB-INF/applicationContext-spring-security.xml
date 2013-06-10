@@ -19,9 +19,12 @@
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/security
-	http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+	http://www.springframework.org/schema/security/spring-security.xsd">
+
+  <http pattern="^/(api|social|assets)/*$" path-type="regex" security="none"/>
+  <http pattern="/favicon.ico" security="none"/>
 
   <http entry-point-ref="samlAuthenticationEntryPoint">
 
@@ -35,11 +38,6 @@
     <intercept-url pattern="${ASSERTION_CONSUMER_URI}" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER"/>
     <!-- necessary? -->
     <intercept-url pattern="/**" access="ROLE_ADMIN,ROLE_USER"/>
-
-    <intercept-url pattern="/api/**" filters="none" />
-    <intercept-url pattern="/social/**" filters="none" />
-    <intercept-url pattern="/assets/**" filters="none" />
-    <intercept-url pattern="/favicon.ico" filters="none" />
   </http>
 
   <authentication-manager alias="authenticationManager">
