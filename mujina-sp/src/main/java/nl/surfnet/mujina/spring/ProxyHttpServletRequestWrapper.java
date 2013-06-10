@@ -48,19 +48,19 @@ public class ProxyHttpServletRequestWrapper extends HttpServletRequestWrapper {
   }
 
   @Override
-  public String getProtocol() {
+  public String getScheme() {
     final String forwardedProto = this.getHeader(X_FORWARDED_PROTO);
     if (StringUtils.isNotBlank(forwardedProto)) {
       return forwardedProto;
     }
-    return super.getProtocol();
+    return super.getScheme();
   }
 
   @Override
   public StringBuffer getRequestURL() {
     final StringBuffer sb = new StringBuffer();
 
-    sb.append(getProtocol());
+    sb.append(getScheme());
     sb.append("://");
     sb.append(getServerName());
 
