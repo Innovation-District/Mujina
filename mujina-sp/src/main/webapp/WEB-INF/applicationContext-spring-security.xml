@@ -23,7 +23,7 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security.xsd">
 
-  <http pattern="^/(api|social|assets)/*$" path-type="regex" security="none"/>
+  <http pattern="^/(api|social|assets)/.*" path-type="regex" security="none"/>
   <http pattern="/favicon.ico" security="none"/>
 
   <http entry-point-ref="samlAuthenticationEntryPoint">
