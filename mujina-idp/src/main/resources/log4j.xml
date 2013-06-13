@@ -34,7 +34,7 @@
     <level value="debug"/>
   </logger>
 
-  <logger name="surfnet">
+  <logger name="nl.surfnet.mujina">
     <level value="debug"/>
   </logger>
 
@@ -42,7 +42,6 @@
   <root>
     <priority value="info"/>
     <appender-ref ref="LogFile"/>
-
   </root>
 
 </log4j:configuration>

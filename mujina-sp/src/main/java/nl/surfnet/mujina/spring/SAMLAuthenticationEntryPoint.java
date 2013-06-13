@@ -27,7 +27,7 @@ import org.opensaml.saml2.core.AuthnRequest;
 import org.opensaml.saml2.metadata.Endpoint;
 import org.opensaml.saml2.metadata.SingleSignOnService;
 import org.opensaml.ws.message.encoder.MessageEncodingException;
-import org.opensaml.xml.security.*;
+import org.opensaml.xml.security.CriteriaSet;
 import org.opensaml.xml.security.credential.Credential;
 import org.opensaml.xml.security.credential.CredentialResolver;
 import org.opensaml.xml.security.credential.UsageType;
@@ -97,7 +97,7 @@ public class SAMLAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
         Endpoint endpoint = endpointGenerator.generateEndpoint(SingleSignOnService.DEFAULT_ELEMENT_NAME, singleSignOnServiceURL, assertionConsumerServiceURL);
 
-        AuthnRequest authnReqeust = authnRequestGenerator.generateAuthnRequest(singleSignOnServiceURL, assertionConsumerServiceURL);
+        AuthnRequest authnRequest = authnRequestGenerator.generateAuthnRequest(singleSignOnServiceURL, assertionConsumerServiceURL);
 
         log.debug("Sending authnRequest to {}", singleSignOnServiceURL);
 
@@ -109,7 +109,7 @@ public class SAMLAuthenticationEntryPoint implements AuthenticationEntryPoint {
             Credential signingCredential = credentialResolver.resolveSingle(criteriaSet);
             Validate.notNull(signingCredential);
 
-            bindingAdapter.sendSAMLMessage(authnReqeust, endpoint, signingCredential, response);
+            bindingAdapter.sendSAMLMessage(authnRequest, endpoint, signingCredential, response);
         } catch (MessageEncodingException mee) {
             log.error("Could not send authnRequest to Identity Provider.", mee);
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
