@@ -18,7 +18,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.surfnet.coin</groupId>
   <artifactId>mujina</artifactId>
-  <version>9</version>
+  <version>10-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <modules>
