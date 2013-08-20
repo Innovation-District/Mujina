@@ -32,8 +32,8 @@
   <repositories>
     <repository>
       <id>innovation-district-nexus</id>
-      <name>Innovation District Nexus Maven repository for third party dependencies</name>
-      <url>https://innovation-district.buildserver.nl/nexus/content/groups/public</url>
+      <name>Onegini Nexus Maven repository for third party dependencies</name>
+      <url>https://buildserver.onegini.com/nexus/content/groups/public</url>
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
@@ -46,14 +46,14 @@
   <distributionManagement>
     <repository>
       <id>innovation-district-nexus</id>
-      <name>Innovation District Nexus Maven releases repository</name>
-      <url>https://innovation-district.buildserver.nl/nexus/content/repositories/releases</url>
+      <name>Onegini Nexus Maven releases repository</name>
+      <url>https://buildserver.onegini.com/nexus/content/repositories/releases</url>
     </repository>
 
     <snapshotRepository>
       <id>innovation-district-nexus</id>
-      <name>Innovation District Nexus Maven snapshots repository</name>
-      <url>https://innovation-district.buildserver.nl/nexus/content/repositories/snapshots</url>
+      <name>Onegini Nexus Maven snapshots repository</name>
+      <url>https://buildserver.onegini.com/nexus/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
 
