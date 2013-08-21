@@ -53,7 +53,7 @@ public class ProxyHttpServletRequestWrapper extends HttpServletRequestWrapper {
     if (StringUtils.isNotBlank(forwardedProto)) {
       return forwardedProto;
     }
-    return super.getProtocol();
+    return super.getScheme();
   }
 
   @Override
