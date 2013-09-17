@@ -18,14 +18,14 @@
   <parent>
     <groupId>com.onegini</groupId>
     <artifactId>mujina</artifactId>
-    <version>11-SNAPSHOT</version>
+    <version>11</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.onegini</groupId>
   <artifactId>mujina-common</artifactId>
-  <version>11-SNAPSHOT</version>
+  <version>11</version>
 
 
   <dependencies>

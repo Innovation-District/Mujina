@@ -19,12 +19,12 @@
   <groupId>com.onegini</groupId>
   <artifactId>mujina-sp</artifactId>
   <packaging>war</packaging>
-  <version>11-SNAPSHOT</version>
+  <version>11</version>
 
   <parent>
     <groupId>com.onegini</groupId>
     <artifactId>mujina</artifactId>
-    <version>11-SNAPSHOT</version>
+    <version>11</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 

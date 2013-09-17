@@ -19,7 +19,7 @@
   <parent>
     <artifactId>mujina</artifactId>
     <groupId>com.onegini</groupId>
-    <version>11-SNAPSHOT</version>
+    <version>11</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
