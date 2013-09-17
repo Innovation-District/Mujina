@@ -60,7 +60,7 @@ ___  ___        _  _
       final List<Attribute> attributes = attributeStatement.getAttributes();
       for (Attribute attribute : attributes) {
         out.print("<dt style=\"font-weight: bold;\">");
-        out.print(attribute.getName());
+        out.print(attribute.getName() + " (" + attribute.getFriendlyName() + ")");
         out.print("</dt><dd id=\"" + attribute.getName() + "\">");
         final List<XMLObject> attributeValues = attribute.getAttributeValues();
         for (XMLObject attributeValue : attributeValues) {
