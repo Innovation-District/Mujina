@@ -18,7 +18,7 @@ package nl.surfnet.mujina.saml.xml;
 
 import javax.xml.namespace.QName;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opensaml.Configuration;
 import org.opensaml.common.SAMLObjectBuilder;
 import org.opensaml.saml2.metadata.Endpoint;

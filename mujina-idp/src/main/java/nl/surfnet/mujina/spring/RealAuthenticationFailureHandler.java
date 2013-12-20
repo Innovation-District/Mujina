@@ -22,12 +22,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 import org.opensaml.saml2.core.Response;
 import org.opensaml.saml2.metadata.AssertionConsumerService;
 import org.opensaml.saml2.metadata.Endpoint;
 import org.opensaml.ws.message.encoder.MessageEncodingException;
-import org.opensaml.xml.security.*;
+import org.opensaml.xml.security.CriteriaSet;
 import org.opensaml.xml.security.credential.Credential;
 import org.opensaml.xml.security.credential.CredentialResolver;
 import org.opensaml.xml.security.credential.UsageType;
@@ -50,77 +50,79 @@ import nl.surfnet.mujina.util.TimeService;
 public class RealAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
 
-    private final static Logger logger = LoggerFactory
-            .getLogger(RealAuthenticationFailureHandler.class);
+  private final static Logger logger = LoggerFactory
+      .getLogger(RealAuthenticationFailureHandler.class);
 
-    private final TimeService timeService;
-    private final IDService idService;
-    private final CredentialResolver credentialResolver;
-    private final BindingAdapter bindingAdapter;
-    private final AuthenticationFailureHandler nonSSOAuthnFailureHandler;
+  private final TimeService timeService;
+  private final IDService idService;
+  private final CredentialResolver credentialResolver;
+  private final BindingAdapter bindingAdapter;
+  private final AuthenticationFailureHandler nonSSOAuthnFailureHandler;
 
 
-    @Autowired
-    IdpConfiguration idpConfiguration;
+  @Autowired
+  IdpConfiguration idpConfiguration;
 
-    public RealAuthenticationFailureHandler(TimeService timeService,
-                                            IDService idService,
-                                            CredentialResolver credentialResolver,
-                                            BindingAdapter bindingAdapter,
-                                            AuthenticationFailureHandler nonSSOAuthnFailureHandler) {
-        super();
-        this.timeService = timeService;
-        this.idService = idService;
-        this.credentialResolver = credentialResolver;
-        this.bindingAdapter = bindingAdapter;
-        this.nonSSOAuthnFailureHandler = nonSSOAuthnFailureHandler;
+  public RealAuthenticationFailureHandler(TimeService timeService,
+                                          IDService idService,
+                                          CredentialResolver credentialResolver,
+                                          BindingAdapter bindingAdapter,
+                                          AuthenticationFailureHandler nonSSOAuthnFailureHandler) {
+    super();
+    this.timeService = timeService;
+    this.idService = idService;
+    this.credentialResolver = credentialResolver;
+    this.bindingAdapter = bindingAdapter;
+    this.nonSSOAuthnFailureHandler = nonSSOAuthnFailureHandler;
+  }
+
+  @Override
+  public void onAuthenticationFailure(HttpServletRequest request,
+                                      HttpServletResponse response,
+                                      AuthenticationException authenticationException)
+      throws IOException, ServletException {
+    logger.debug("commencing RealAuthenticationFailureHandler because of {}", authenticationException.getClass());
+
+    AuthnRequestInfo authnRequestInfo = (AuthnRequestInfo) request.getSession().getAttribute(AuthnRequestInfo.class.getName());
+
+    if (authnRequestInfo == null) {
+      logger.warn("Could not find AuthnRequestInfo on the request.  Delegating to nonSSOAuthnFailureHandler.");
+      nonSSOAuthnFailureHandler.onAuthenticationFailure(request, response, authenticationException);
+      return;
     }
 
-    @Override
-    public void onAuthenticationFailure(HttpServletRequest request,
-                                        HttpServletResponse response,
-                                        AuthenticationException authenticationException)
-            throws IOException, ServletException {
-        logger.debug("commencing RealAuthenticationFailureHandler because of {}", authenticationException.getClass());
+    logger.debug("AuthnRequestInfo is {}", authnRequestInfo);
 
-        AuthnRequestInfo authnRequestInfo = (AuthnRequestInfo) request.getSession().getAttribute(AuthnRequestInfo.class.getName());
+    request.getSession().setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, authenticationException);
 
-        if (authnRequestInfo == null) {
-            logger.warn("Could not find AuthnRequestInfo on the request.  Delegating to nonSSOAuthnFailureHandler.");
-            nonSSOAuthnFailureHandler.onAuthenticationFailure(request, response, authenticationException);
-            return;
-        }
+    CriteriaSet criteriaSet = new CriteriaSet();
+    criteriaSet.add(new EntityIDCriteria(idpConfiguration.getEntityID()));
+    criteriaSet.add(new UsageCriteria(UsageType.SIGNING));
 
-        logger.debug("AuthnRequestInfo is {}", authnRequestInfo);
-
-        request.getSession().setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, authenticationException);
-
-        CriteriaSet criteriaSet = new CriteriaSet();
-        criteriaSet.add(new EntityIDCriteria(idpConfiguration.getEntityID()));
-        criteriaSet.add(new UsageCriteria(UsageType.SIGNING));
-
-        Credential signingCredential = null;
-        try {
-            signingCredential = credentialResolver.resolveSingle(criteriaSet);
-        } catch (org.opensaml.xml.security.SecurityException e) {
-            logger.warn("Unable to resolve signing credential for entityId", e);
-            return;
-        }
-        Validate.notNull(signingCredential);
-
-        AuthnResponseGenerator authnResponseGenerator = new AuthnResponseGenerator(signingCredential, idpConfiguration.getEntityID(), timeService, idService, idpConfiguration);
-        EndpointGenerator endpointGenerator = new EndpointGenerator();
-
-        Response authResponse = authnResponseGenerator.generateAuthnResponseFailure(authnRequestInfo.getAssertionConumerURL(), authnRequestInfo.getAuthnRequestID(), authenticationException);
-        Endpoint endpoint = endpointGenerator.generateEndpoint(AssertionConsumerService.DEFAULT_ELEMENT_NAME, authnRequestInfo.getAssertionConumerURL(), null);
-
-        request.getSession().removeAttribute(AuthnRequestInfo.class.getName());
-
-        try {
-            bindingAdapter.sendSAMLMessage(authResponse, endpoint, signingCredential, response);
-        } catch (MessageEncodingException mee) {
-            logger.error("Exception encoding SAML message", mee);
-            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
-        }
+    Credential signingCredential = null;
+    try {
+      signingCredential = credentialResolver.resolveSingle(criteriaSet);
     }
+    catch (org.opensaml.xml.security.SecurityException e) {
+      logger.warn("Unable to resolve signing credential for entityId", e);
+      return;
+    }
+    Validate.notNull(signingCredential);
+
+    AuthnResponseGenerator authnResponseGenerator = new AuthnResponseGenerator(signingCredential, idpConfiguration.getEntityID(), timeService, idService, idpConfiguration);
+    EndpointGenerator endpointGenerator = new EndpointGenerator();
+
+    Response authResponse = authnResponseGenerator.generateAuthnResponseFailure(authnRequestInfo.getAssertionConumerURL(), authnRequestInfo.getAuthnRequestID(), authenticationException);
+    Endpoint endpoint = endpointGenerator.generateEndpoint(AssertionConsumerService.DEFAULT_ELEMENT_NAME, authnRequestInfo.getAssertionConumerURL(), null);
+
+    request.getSession().removeAttribute(AuthnRequestInfo.class.getName());
+
+    try {
+      bindingAdapter.sendSAMLMessage(authResponse, endpoint, signingCredential, response);
+    }
+    catch (MessageEncodingException mee) {
+      logger.error("Exception encoding SAML message", mee);
+      response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+    }
+  }
 }

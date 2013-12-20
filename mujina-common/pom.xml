@@ -23,7 +23,6 @@
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.onegini</groupId>
   <artifactId>mujina-common</artifactId>
   <version>12-SNAPSHOT</version>
 
@@ -33,6 +32,11 @@
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
     </dependency>
 
     <dependency>
