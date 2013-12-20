@@ -1,5 +1,8 @@
 package nl.surfnet.mujina.controllers.tests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -25,7 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -39,8 +42,6 @@ import nl.surfnet.mujina.saml.xml.EndpointGenerator;
 import nl.surfnet.mujina.spring.security.CustomAuthenticationProvider;
 import nl.surfnet.mujina.util.IDService;
 import nl.surfnet.mujina.util.TimeService;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
 
 public class TestHelper {
 
@@ -103,7 +104,7 @@ public class TestHelper {
         assertEquals(response.getStatus(), 200);
 
         final List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-        grantedAuthorities.add(new GrantedAuthorityImpl("ROLE_USER"));
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
         SimpleAuthentication auth = new SimpleAuthentication(user, password, grantedAuthorities);
         if (customAuthenticationProvider.authenticate(auth) == null) {

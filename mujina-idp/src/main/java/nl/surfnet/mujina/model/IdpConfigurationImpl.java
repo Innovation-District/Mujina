@@ -26,7 +26,7 @@ import java.util.TreeMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 public class IdpConfigurationImpl extends CommonConfigurationImpl implements IdpConfiguration {
 
@@ -64,12 +64,12 @@ public class IdpConfigurationImpl extends CommonConfigurationImpl implements Idp
         }
         users.clear();
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
-        authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         final SimpleAuthentication admin = new SimpleAuthentication("admin", "secret", authorities);
         users.add(admin);
         authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         final SimpleAuthentication user= new SimpleAuthentication("user", "secret", authorities);
         users.add(user);
     }

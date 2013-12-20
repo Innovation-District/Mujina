@@ -1,5 +1,7 @@
 package nl.surfnet.mujina.controllers.tests;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -14,7 +16,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import nl.surfnet.mujina.model.SpConfiguration;
 import nl.surfnet.mujina.spring.SAMLAuthenticationEntryPoint;
-import static junit.framework.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {

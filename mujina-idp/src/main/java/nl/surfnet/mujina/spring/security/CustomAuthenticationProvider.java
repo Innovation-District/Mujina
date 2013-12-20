@@ -26,7 +26,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import nl.surfnet.mujina.model.AuthenticationMethod;
 import nl.surfnet.mujina.model.IdpConfiguration;
@@ -44,7 +44,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         if (idpConfiguration.getAuthentication() == AuthenticationMethod.Method.ALL) {
             final List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-            authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
+            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
             return new SimpleAuthentication(name, password, authorities);
         } else {
             final Collection<SimpleAuthentication> users = idpConfiguration.getUsers();

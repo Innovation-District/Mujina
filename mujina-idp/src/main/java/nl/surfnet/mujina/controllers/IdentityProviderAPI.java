@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -75,7 +75,7 @@ public class IdentityProviderAPI {
         final List<GrantedAuthority> grants = new ArrayList<GrantedAuthority>();
         final List<String> authorities = user.getAuthorities();
         for (String authority : authorities) {
-            grants.add(new GrantedAuthorityImpl(authority));
+            grants.add(new SimpleGrantedAuthority(authority));
         }
         SimpleAuthentication auth = new SimpleAuthentication(user.getName(), user.getPassword(), grants);
         configuration.getUsers().add(auth);

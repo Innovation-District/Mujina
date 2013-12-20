@@ -16,6 +16,11 @@
 
 package nl.surfnet.mujina.controllers.tests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -32,17 +37,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import nl.surfnet.mujina.controllers.IdentityProviderAPI;
 import nl.surfnet.mujina.controllers.CommonAPI;
+import nl.surfnet.mujina.controllers.IdentityProviderAPI;
 import nl.surfnet.mujina.model.Attribute;
 import nl.surfnet.mujina.model.AuthenticationMethod;
 import nl.surfnet.mujina.model.Credential;
 import nl.surfnet.mujina.model.EntityID;
 import nl.surfnet.mujina.model.User;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
