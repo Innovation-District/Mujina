@@ -90,7 +90,7 @@
 
     <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
+      <artifactId>javax.servlet-api</artifactId>
       <scope>provided</scope>
     </dependency>
 
@@ -176,20 +176,22 @@
       </plugin>
       <plugin>
         <groupId>org.mortbay.jetty</groupId>
-        <artifactId>maven-jetty-plugin</artifactId>
-        <version>6.1.26</version>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>${jetty-maven-plugin.version}</version>
         <configuration>
-          <contextPath>/</contextPath>
+          <webApp>
+            <contextPath>/</contextPath>
+          </webApp>
           <scanIntervalSeconds>3</scanIntervalSeconds>
           <connectors>
-            <connector implementation="org.mortbay.jetty.security.SslSocketConnector">
+            <connector implementation="org.eclipse.jetty.server.ssl.SslSelectChannelConnector">
               <port>18443</port>
               <maxIdleTime>60000</maxIdleTime>
               <keystore>${project.build.directory}/jetty-ssl.keystore</keystore>
               <password>jetty6</password>
               <keyPassword>jetty6</keyPassword>
             </connector>
-            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+            <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
               <port>18181</port>
               <maxIdleTime>60000</maxIdleTime>
             </connector>
