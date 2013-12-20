@@ -18,7 +18,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.onegini</groupId>
   <artifactId>mujina</artifactId>
-  <version>12</version>
+  <version>13-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <modules>
@@ -59,7 +59,7 @@
     <connection>scm:git:git://github.com/Innovation-District/Mujina.git</connection>
     <developerConnection>scm:git:git@github.com:Innovation-District/Mujina.git</developerConnection>
     <url>scm:git:git@github.com:Innovation-District/Mujina.git</url>
-    <tag>mujina-12</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <properties>
