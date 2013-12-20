@@ -26,8 +26,6 @@
     <module>mujina-common</module>
     <module>mujina-sp</module>
     <module>mujina-idp</module>
-    <module>mujina-idp-dist</module>
-    <module>mujina-sp-dist</module>
   </modules>
 
   <repositories>
