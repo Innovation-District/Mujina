@@ -56,9 +56,9 @@
   </distributionManagement>
 
   <scm>
-    <connection>scm:git:git://github.com/Innovation-District/Mujina.git</connection>
-    <developerConnection>scm:git:git@github.com:Innovation-District/Mujina.git</developerConnection>
-    <url>scm:git:git@github.com:Innovation-District/Mujina.git</url>
+    <connection>scm:git:https://github.com/Innovation-District/Mujina.git</connection>
+    <developerConnection>scm:git:https://github.com/Innovation-District/Mujina.git</developerConnection>
+    <url>scm:git:https://github.com/Innovation-District/Mujina.git</url>
     <tag>HEAD</tag>
   </scm>
 
